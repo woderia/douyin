@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import root.bean.JsonData;
 import root.dto.UserDto;
@@ -19,13 +19,13 @@ import root.service.UserService;
 import root.utils.MD5Util;
 
 @RestController
-@Api(value="用户登录注册的接口", tags={"注册和登录的controller"})
-public class RegistLoginController extends BasicController{
+@Api(value = "用户登录注册的接口", tags = { "注册和登录的controller" })
+public class RegistLoginController extends BasicController {
 
 	@Resource
 	private UserService userService;
-	
-	@ApiOperation(value="用户注册", notes="用户注册的接口")
+
+	@ApiOperation(value = "用户注册", notes = "用户注册的接口")
 	@PostMapping("/regist")
 	public JsonData regist(@RequestBody User user) {
 		if (StringUtils.isBlank(user.getUsername()) || StringUtils.isBlank(user.getPassword())) {
@@ -45,8 +45,8 @@ public class RegistLoginController extends BasicController{
 		UserDto dto = setUserRedisSessionToken(user);
 		return JsonData.ok(dto);
 	}
-	
-	@ApiOperation(value="用户登录", notes="用户登录的接口")
+
+	@ApiOperation(value = "用户登录", notes = "用户登录的接口")
 	@PostMapping("/login")
 	public JsonData login(@RequestBody User user) throws Exception {
 		String username = user.getUsername();
@@ -65,14 +65,22 @@ public class RegistLoginController extends BasicController{
 			return JsonData.errorMsg("用户名或密码不正确, 请重试...");
 		}
 	}
-	
+
 	public UserDto setUserRedisSessionToken(User userModule) {
 		String uniqueToken = UUID.randomUUID().toString();
 		// 30分钟到期的token,redis已:分文件夹
-		redis.set(USER_REDIS_SESSION +":"+ userModule.getId(), uniqueToken, 1000 * 60 * 30);
+		redis.set(USER_REDIS_SESSION + ":" + userModule.getId(), uniqueToken, 1000 * 60 * 30);
 		UserDto dto = UserDto.adapt(userModule);
 		dto.setUserToken(uniqueToken);
 		return dto;
 	}
-	
+
+	@ApiOperation(value="用户注销", notes="用户注销的接口")
+	@ApiImplicitParam(name="userId", value="用户id", required=true, 
+						dataType="String", paramType="query")
+	@PostMapping("/logout")
+	public JsonData logout(String userId) {
+		redis.del(USER_REDIS_SESSION + ":" + userId);
+		return JsonData.ok();
+	}
 }
