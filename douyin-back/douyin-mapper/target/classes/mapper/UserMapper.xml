@@ -125,4 +125,17 @@
       receive_like_counts = #{receiveLikeCounts,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  
+  <select id="countByUsername" parameterType="map" resultType="int">
+  	select count(1)
+  	from users
+  	where username = #{username}
+  </select>
+  
+  <select id="getUserByUsernameAndPassword" parameterType="map" resultType="root.model.User">
+  	select <include refid="Base_Column_List" />
+  	from users
+  	where username = #{username}
+  	  and password = #{password}
+  </select>
 </mapper>

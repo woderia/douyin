@@ -7,4 +7,11 @@
   </parent>
   <artifactId>douyin-model</artifactId>
   <name>douyin-model</name>
+  <dependencies>
+  	<dependency>
+    	<groupId>root</groupId>
+    	<artifactId>douyin-common</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
 </project>
