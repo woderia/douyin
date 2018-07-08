@@ -6,6 +6,7 @@ Page({
     faceUrl: "../resource/images/noneface.png"
   },
   onLoad: function () {
+    // 加载个人信息
     var self = this
     var user = app.userInfo
     var serverUrl = app.serverUrl
@@ -41,7 +42,7 @@ Page({
     wx.showLoading({
       title: '请等待...',
     });
-    // 调用后端
+    // 注销
     wx.request({
       url: serverUrl + '/logout?userId=' + user.id,
       method: "POST",
@@ -108,6 +109,44 @@ Page({
           }
         })
       },
+    })
+  },
+  uploadVideo: function() {
+    // 上传视频
+    var self = this
+    wx.chooseVideo({
+      sourceType: ['album'],
+      success: function(res) {
+        console.log(res)
+        var duration = res.duration
+        var tmpWidth = res.width
+        var tmpHeight = res.height
+        var tmpVideoUrl = res.tempFilePath
+        var tmpCoverUrl = res.humbTempFilePath
+        // 时间视频是否太长
+        if (duration > 11) {
+          wx.showToast({
+            title: '视频长度不能超过十秒..',
+            icon: 'none',
+            duration: 2500
+          })
+        } else if(duration < 1) {
+          wx.showToast({
+            title: '视频长度太短了..',
+            icon: 'none',
+            duration: 2500
+          })
+        }else {
+          // 选择BGM，跳转页面，携带参数
+          wx.navigateTo({
+            url: '../chooseBgm/chooseBgm?duration=' + duration
+            + "&tmpHeight=" + tmpHeight
+            + "&tmpWidth=" + tmpWidth
+            + "&tmpVideoUrl=" + tmpVideoUrl
+            + "&tmpCoverUrl=" + tmpCoverUrl
+          })
+        }
+      }
     })
   }
 })

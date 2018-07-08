@@ -79,4 +79,9 @@
       path = #{path,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="getAll" resultType="root.model.Bgm">
+  	select 
+    <include refid="Base_Column_List" />
+    from bgm 
+  </select>
 </mapper>

@@ -19,7 +19,7 @@ import root.service.UserService;
 import root.utils.MD5Util;
 
 @RestController
-@Api(value = "用户登录注册的接口", tags = { "注册和登录的controller" })
+@Api(value = "用户登录注册的接口", tags = { "注册和登录的Controller" })
 public class RegistLoginController extends BasicController {
 
 	@Resource
