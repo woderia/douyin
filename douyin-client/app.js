@@ -1,4 +1,4 @@
 App({
-  serverUrl: "http://127.0.0.1:8090",
+  serverUrl: "http://192.168.31.28:8090",
   userInfo: null
 })

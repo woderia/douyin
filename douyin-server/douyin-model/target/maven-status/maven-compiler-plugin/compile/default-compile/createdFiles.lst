@@ -1,0 +1,11 @@
+root\model\Comments.class
+root\dto\UserDto.class
+root\model\User.class
+root\model\Video.class
+root\model\UserReport.class
+root\model\SearchRecords.class
+root\model\UserLikeVideo.class
+root\param\VideoParam.class
+root\model\Bgm.class
+root\model\UserFan.class
+root\bean\JsonData.class

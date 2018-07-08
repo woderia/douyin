@@ -34,7 +34,7 @@ public class UserController {
 	@ApiOperation(value="用户上传头像", notes="用户上传头像的接口")
 	@ApiImplicitParam(name="userId", value="用户id", required=true,
 						dataType="String", paramType="query")
-	@PostMapping("/uploadFace", headers="content-type=multipart/form-data")
+	@PostMapping(value="/uploadFace", headers="content-type=multipart/form-data")
 	public JsonData uploadFace(String userId,@RequestParam("file") MultipartFile[] files) {
 		
 		if (StringUtils.isBlank(userId)) {

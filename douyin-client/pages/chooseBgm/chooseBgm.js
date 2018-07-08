@@ -29,13 +29,14 @@ Page({
           console.log(res.data);
           wx.hideLoading();
           if (res.data.status == 200) {
-
-          } else if (res.data.status == 502) {
             var bgmList = res.data.data
             self.setData({
               bgmList: bgmList,
               serverUrl: serverUrl
             })
+            console.log(self.data.bgmList)
+          } else if (res.data.status == 502) {
+            
           }
         }
       })
@@ -78,8 +79,11 @@ Page({
             wx.showToast({
               title: '上传成功!~~',
               icon: "success"
-            })
-            
+            });
+            // 上传成功后跳回之前的页面
+            wx.navigateBack({
+              delta: 1
+            })   
           } else if (data.status == 500) {
             wx.showToast({
               title: data.msg
