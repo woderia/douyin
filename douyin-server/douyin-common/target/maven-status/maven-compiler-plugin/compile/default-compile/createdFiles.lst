@@ -5,6 +5,7 @@ root\enums\BGMOperatorTypeEnum.class
 org\n3r\idworker\Code.class
 org\n3r\idworker\strategy\FileLock.class
 root\ffmpeg\FFMpegTest.class
+root\ffmpeg\FetchVideoCover.class
 org\n3r\idworker\Test.class
 org\n3r\idworker\Sid$1.class
 org\n3r\idworker\utils\Props.class

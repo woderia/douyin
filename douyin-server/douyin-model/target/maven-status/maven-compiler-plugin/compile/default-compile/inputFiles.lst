@@ -1,11 +1,13 @@
+D:\eclipse-workspace\douyin\douyin-model\src\main\java\root\param\VideoParam.java
+D:\eclipse-workspace\douyin\douyin-model\src\main\java\root\bean\JsonData.java
+D:\eclipse-workspace\douyin\douyin-model\src\main\java\root\model\Bgm.java
+D:\eclipse-workspace\douyin\douyin-model\src\main\java\root\model\UserReport.java
+D:\eclipse-workspace\douyin\douyin-model\src\main\java\root\bean\PageResult.java
 D:\eclipse-workspace\douyin\douyin-model\src\main\java\root\model\User.java
 D:\eclipse-workspace\douyin\douyin-model\src\main\java\root\model\UserLikeVideo.java
 D:\eclipse-workspace\douyin\douyin-model\src\main\java\root\model\UserFan.java
 D:\eclipse-workspace\douyin\douyin-model\src\main\java\root\model\Video.java
 D:\eclipse-workspace\douyin\douyin-model\src\main\java\root\model\SearchRecords.java
 D:\eclipse-workspace\douyin\douyin-model\src\main\java\root\model\Comments.java
-D:\eclipse-workspace\douyin\douyin-model\src\main\java\root\param\VideoParam.java
-D:\eclipse-workspace\douyin\douyin-model\src\main\java\root\bean\JsonData.java
+D:\eclipse-workspace\douyin\douyin-model\src\main\java\root\dto\VideoDto.java
 D:\eclipse-workspace\douyin\douyin-model\src\main\java\root\dto\UserDto.java
-D:\eclipse-workspace\douyin\douyin-model\src\main\java\root\model\Bgm.java
-D:\eclipse-workspace\douyin\douyin-model\src\main\java\root\model\UserReport.java

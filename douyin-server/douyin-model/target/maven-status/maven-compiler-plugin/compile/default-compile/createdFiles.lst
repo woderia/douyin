@@ -1,7 +1,9 @@
+root\dto\VideoDto.class
 root\model\Comments.class
 root\dto\UserDto.class
 root\model\User.class
 root\model\Video.class
+root\bean\PageResult.class
 root\model\UserReport.class
 root\model\SearchRecords.class
 root\model\UserLikeVideo.class

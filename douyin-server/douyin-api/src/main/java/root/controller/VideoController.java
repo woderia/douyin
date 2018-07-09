@@ -21,6 +21,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import root.bean.JsonData;
+import root.bean.PageResult;
 import root.enums.VideoStatusEnum;
 import root.ffmpeg.FetchVideoCover;
 import root.model.Video;
@@ -163,5 +164,14 @@ public class VideoController extends BasicController {
 			}
 		}
 		return JsonData.ok();
+	}
+	
+	@PostMapping(value="/showAll")
+	public JsonData uploadCover(Integer page) {
+		if (page == null) {
+			page = 1;
+		}
+		PageResult allVideos = videoService.getAllVideos(page, PAGE_SIZE);
+		return JsonData.ok(allVideos);
 	}
 }

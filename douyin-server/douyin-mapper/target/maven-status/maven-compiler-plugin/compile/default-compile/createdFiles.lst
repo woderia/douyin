@@ -4,6 +4,7 @@ root\mapper\UserFanMapper.class
 root\mapper\VideoMapper.class
 META-INF\spring-configuration-metadata.json
 root\mapper\SearchRecordsMapper.class
+root\mapper\VideoDtoMapper.class
 root\mapper\UserLikeVideoMapper.class
 root\mapper\UserReportMapper.class
 root\mapper\UserMapper.class

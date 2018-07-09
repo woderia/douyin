@@ -1,54 +1,78 @@
-//index.js
-//获取应用实例
 const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    // 用于分页的属性  
+    totalPage: 1,
+    page: 1,
+    videoList: [],
+    screenWidth: 350,
+    serverUrl: ""
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
+  onLoad: function(param) {
+    var self = this
+    // 获得屏幕的宽度,同步方式
+    var screenWidth = wx.getSystemInfoSync().screenWidth
+    self.setData({
+      screenWidth: screenWidth 
     })
+    // 当前页
+    var page = self.data.page
+    self.getAllVideoList(page)
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
+  getAllVideoList: function(page) {
+    var self = this
+    var serverUrl = app.serverUrl
+    wx.showLoading({
+      title: '请等待,加载中..',
+    })
+    wx.request({
+      url: serverUrl + '/video/showAll?page=' + page,
+      method: "POST",
+      success: function (res) {
+        // 停止加载图
+        wx.hideLoading()
+        wx.hideNavigationBarLoading()
+        wx.stopPullDownRefresh()
+        console.log(res)
+        if (page == 1) {
+          self.setData({
+            videoList: []
           })
         }
-      })
-    }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+        var videoList = res.data.data.rows
+        var newVideoList = self.data.videoList
+        self.setData({
+          videoList: newVideoList.concat(videoList),
+          page: page,
+          totalPage: res.data.data.total,
+          serverUrl: serverUrl
+        })
+      }
     })
+  },
+  onReachBottom: function() {
+    // 上拉刷新
+    var self = this
+    var currentPage = self.data.page
+    var totalPage = self.data.totalPage
+    // 当前页数是否是总页数,是则无需查询
+    if (currentPage === totalPage) {
+      wx.showToast({
+        title: '已经没有视频了...',
+        icon: "none"
+      })
+      return
+    }
+    var page = currentPage + 1
+    self.getAllVideoList(page)
+  },
+  onPullDownRefresh: function() {
+    // 下拉刷新整个页面,json文件中配置"enablePullDownRefresh": true
+    wx.showNavigationBarLoading()
+    this.getAllVideoList(1)
+  },
+  showVideoInfo: function(e) {
+
   }
 })

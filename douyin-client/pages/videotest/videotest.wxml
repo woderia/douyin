@@ -1,0 +1,22 @@
+<video
+  src=''
+  poster=''
+  muted='{{true}}'
+  duration='8'
+  controls='{{true}}'
+  danmu-list='{{danmuList}}'
+  enable-danmu='{{true}}'
+  danmu-btn='{{true}}'
+  autoplay='{{true}}'
+  loop='{{true}}'
+  page-gesture='{{true}}'
+  direction='90'
+  show-progress='{{true}}'
+  show-fullscreen-btn='{{true}}'
+  show-play-btn='{{true}}'
+  show-center-play-btn='{{true}}'
+  enable-progress-gesture='{{true}}'
+  bindplay='bindplay'
+  bindpause='bindpause'
+>
+</video>
