@@ -7,6 +7,7 @@
   </parent>
   <artifactId>douyin-api</artifactId>
   <name>douyin-api</name>
+  <packaging>jar</packaging>
   <dependencies>
     <dependency>
     	<groupId>root</groupId>
@@ -24,4 +25,31 @@
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
+  <build>
+  	<plugins>
+  		<!-- 打包为war时可以取消报错 -->
+  		<!--  <plugin>
+           <artifactId>maven-war-plugin</artifactId>
+            <version>3.0.0</version>
+   		 </plugin>  -->
+   		 
+   		<!-- 打包成jar时打开，war时不打开 -->
+   		<plugin>
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-maven-plugin</artifactId>
+	      <version>2.0.3.RELEASE</version>
+	      <configuration>
+	        <mainClass>${start-class}</mainClass>
+	        <layout>ZIP</layout>
+	      </configuration>
+	      <executions>
+	        <execution>
+	          <goals>
+	            <goal>repackage</goal>
+	          </goals>
+	        </execution>
+	      </executions>
+	    </plugin>
+  	</plugins>
+  </build>
 </project>

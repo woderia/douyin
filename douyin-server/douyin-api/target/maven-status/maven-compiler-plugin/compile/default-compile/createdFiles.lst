@@ -1,8 +1,9 @@
-root\controller\BgmController.class
 root\controller\VideoController.class
 root\Swagger2.class
-root\controller\RegistLoginController.class
 root\controller\BasicController.class
 root\WebMvcConfig.class
-root\DouyinApplication.class
 root\controller\UserController.class
+root\interceptor\MiniInterceptor.class
+root\controller\BgmController.class
+root\controller\RegistLoginController.class
+root\DouyinApplication.class

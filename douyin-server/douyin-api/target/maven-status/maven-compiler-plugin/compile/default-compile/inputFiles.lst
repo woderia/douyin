@@ -4,5 +4,6 @@ D:\eclipse-workspace\douyin\douyin-api\src\main\java\root\controller\BasicContro
 D:\eclipse-workspace\douyin\douyin-api\src\main\java\root\controller\VideoController.java
 D:\eclipse-workspace\douyin\douyin-api\src\main\java\root\controller\RegistLoginController.java
 D:\eclipse-workspace\douyin\douyin-api\src\main\java\root\controller\UserController.java
+D:\eclipse-workspace\douyin\douyin-api\src\main\java\root\interceptor\MiniInterceptor.java
 D:\eclipse-workspace\douyin\douyin-api\src\main\java\root\Swagger2.java
 D:\eclipse-workspace\douyin\douyin-api\src\main\java\root\WebMvcConfig.java
