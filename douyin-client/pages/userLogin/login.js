@@ -4,6 +4,14 @@ Page({
   data: {
 
   },
+  onLoad: function() {
+    var user = app.getGlobalUserInfo()
+    if (user) {
+      wx.redirectTo({
+        url: '../mine/mine',
+      })
+    }
+  },
   doLogin: function(e) {
     var formObject = e.detail.value
     var username = formObject.username
@@ -42,7 +50,8 @@ Page({
               icon: 'none',
               duration: 3000
             })
-            app.userInfo = res.data.data
+            // app.userInfo = res.data.data
+            app.setGlobalUserInfo(res.data.data)
             // 跳转页面...
             wx.navigateTo({
               url: '../mine/mine',

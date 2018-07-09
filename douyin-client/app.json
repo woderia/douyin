@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/userLogin/login",
+    "pages/index/index",
     "pages/videoinfo/videoinfo",
     "pages/searchVideo/searchVideo",
-    "pages/index/index",
-    "pages/userLogin/login",
     "pages/chooseBgm/chooseBgm",
     "pages/mine/mine",
     "pages/userRegist/regist"
@@ -14,5 +14,5 @@
     "navigationBarTitleText": "抖音",
     "navigationBarTextStyle": "black"
   },
-  "debug": true
+  "debug": false
 }

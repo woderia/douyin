@@ -8,7 +8,7 @@ Page({
   onLoad: function () {
     // 加载个人信息
     var self = this
-    var user = app.userInfo
+    var user = app.getGlobalUserInfo()
     var serverUrl = app.serverUrl
     wx.showLoading({
       title: '请等待...',
@@ -16,10 +16,15 @@ Page({
     wx.request({
       url: serverUrl + '/user/query?userId=' + user.id,
       method: 'POST',
+      header: {
+        'content-type': 'application/json', // 默认值
+        'headerUserId': user.id,
+        'headerUserToken': user.userToken
+      },
       success: function (res) {
         wx.hideLoading()  
         if (res.data.status == 200) {
-            var userInfo = res.data.data
+          var userInfo = app.getGlobalUserInfo()
             var faceUrl = "../resource/images/noneface.png" 
             if (userInfo.faceImage != null && userInfo.faceImage != '' && userInfo.faceImage!=undefined) {
               faceUrl = serverUrl + userInfo.faceImage
@@ -37,7 +42,7 @@ Page({
     })
   },
   logout: function(param) {
-    var user = app.userInfo
+    var user = app.getGlobalUserInfo()
     var serverUrl = app.serverUrl;
     wx.showLoading({
       title: '请等待...',
@@ -59,7 +64,7 @@ Page({
             duration: 2000
           });
           // 清除内容
-          app.userInfo = null
+          app.removeGlobalUserInfo()
           // 页面跳转
           wx.redirectTo({
             url: '../userLogin/login',
@@ -70,6 +75,7 @@ Page({
   },
   changeFace: function () {
     var self = this
+    var userInfo = app.getGlobalUserInfo()
     // 找本地相册
     wx.chooseImage({
       count: 1,
@@ -83,9 +89,14 @@ Page({
         })
         var serverUrl = app.serverUrl
         wx.uploadFile({
-          url: serverUrl + '/user/uploadFace?userId='+app.userInfo.id,
+          url: serverUrl + '/user/uploadFace?userId='+userInfo.id,
           filePath: tempFilePaths[0],
           name: 'file',
+          header: {
+            'content-type': 'application/json', // 默认值
+            'headerUserId': userInfo.id,
+            'headerUserToken': userInfo.userToken
+          },
           success: function(res) {
             // 返回的时字符串而不是json
             var data = JSON.parse(res.data)
@@ -148,5 +159,10 @@ Page({
         }
       }
     })
-  }
+  },
+  goIndex: function() {
+    wx.redirectTo({
+      url: '../index/index',
+    })
+  } 
 })

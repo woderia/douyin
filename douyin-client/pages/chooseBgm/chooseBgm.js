@@ -45,7 +45,7 @@ Page({
     upload: function(e) {
       // 获取表单数据
       var self = this
-      var userInfo = app.userInfo
+      var userInfo = app.getGlobalUserInfo()
       var serverUrl = app.serverUrl
       var bgmId = e.detail.value.bgmId
       var desc = e.detail.value.desc

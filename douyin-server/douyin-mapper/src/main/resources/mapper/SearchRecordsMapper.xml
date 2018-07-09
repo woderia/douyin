@@ -55,4 +55,12 @@
     set content = #{content,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  
+  <select id="getHotwords" resultType="String">
+  	<!-- 查询热搜词的数量 -->
+  	select content
+  	from search_records
+  	group by content
+  	order by count(content) desc
+  </select>
 </mapper>

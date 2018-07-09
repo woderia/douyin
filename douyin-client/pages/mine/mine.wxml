@@ -11,7 +11,7 @@
 
       <button size='mini' class='primary' bindtap='uploadVideo'> 上传作品</button>
       <button size='mini' type='' class='logout' bindtap='logout'>注销</button>
-      
+      <button size='mini' class='primary' bindtap='goIndex'>主页</button>
     <view class='container-row'>
       <label class='info-items'>{{fansCounts}} 粉丝</label>
       <label class='info-items'>{{followCounts}} 关注</label>

@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,7 @@ import root.bean.JsonData;
 import root.bean.PageResult;
 import root.enums.VideoStatusEnum;
 import root.ffmpeg.FetchVideoCover;
+import root.model.Comments;
 import root.model.Video;
 import root.param.VideoParam;
 import root.service.VideoService;
@@ -120,7 +122,7 @@ public class VideoController extends BasicController {
 				dataType="String", paramType="form")
 	})
 	@PostMapping(value="/uploadCover", headers="content-type=multipart/form-data")
-	public JsonData upload(String videoId, String userId, @RequestParam("file") MultipartFile file ) {
+	public JsonData uploadCover(String videoId, String userId, @RequestParam("file") MultipartFile file ) {
 		if (StringUtils.isBlank(videoId) || StringUtils.isBlank(userId)) {
 			return JsonData.errorMsg("视频主键id和用户id不能为空...");
 		}
@@ -166,12 +168,20 @@ public class VideoController extends BasicController {
 		return JsonData.ok();
 	}
 	
+	
 	@PostMapping(value="/showAll")
-	public JsonData uploadCover(Integer page) {
+	public JsonData getAll(Video video,Integer isSaveRecord, Integer page) {
 		if (page == null) {
 			page = 1;
 		}
-		PageResult allVideos = videoService.getAllVideos(page, PAGE_SIZE);
+		PageResult allVideos = videoService.getAllVideos(video, isSaveRecord,page, PAGE_SIZE);
 		return JsonData.ok(allVideos);
 	}
+	
+	
+	@PostMapping(value="/hot")
+	public JsonData hot() {
+		return JsonData.ok(videoService.getHotwords());
+	}
+
 }

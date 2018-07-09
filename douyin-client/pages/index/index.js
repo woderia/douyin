@@ -73,6 +73,14 @@ Page({
     this.getAllVideoList(1)
   },
   showVideoInfo: function(e) {
-
+    // 跳转到视频详情页
+    var self = this
+    var videoList = self.data.videoList
+    var arrindex = e.target.dataset.arrindex
+    // 取得视频信息
+    var videoInfo = JSON.stringify(videoList[arrindex])
+    wx.redirectTo({
+      url: '../videoinfo/videoinfo?videoInfo=' + videoInfo,
+    })
   }
 })
